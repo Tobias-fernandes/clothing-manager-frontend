@@ -1,0 +1,219 @@
+# Clothing Manager — Checklist do Frontend
+
+## Stack recomendada
+- **Next.js 14+** com App Router
+- **TypeScript**
+- **shadcn/ui** — componentes de UI
+- **react-hook-form + zod** — formulários e validação
+- **TanStack Query (react-query)** — cache e requisições
+- **axios** — cliente HTTP
+- **lucide-react** — ícones
+
+---
+
+## Fase 1 — Configuração inicial
+
+- [ ] Criar projeto com `npx create-next-app@latest`
+- [ ] Instalar e configurar **shadcn/ui**
+- [ ] Instalar dependências: `axios`, `react-hook-form`, `zod`, `@hookform/resolvers`, `@tanstack/react-query`, `lucide-react`
+- [ ] Criar `.env.local` com `NEXT_PUBLIC_API_URL`
+- [ ] Criar `src/services/api.ts` — instância base do axios com interceptor de token
+- [ ] Criar `src/types/` — todas as tipagens do projeto
+- [ ] Criar `src/contexts/AuthContext.tsx` — dados do usuário logado
+- [ ] Criar `src/app/api/auth/login/route.ts` — Route Handler para setar cookie HttpOnly
+- [ ] Criar `src/middleware.ts` — proteção de rotas
+
+---
+
+## Fase 2 — Autenticação
+
+- [ ] **Página de Login** (`/login`)
+  - [ ] Formulário com email e senha
+  - [ ] Validação com zod
+  - [ ] Requisição para Route Handler `/api/auth/login`
+  - [ ] Salvar token em cookie HttpOnly
+  - [ ] Redirecionar para dashboard após login
+  - [ ] Exibir mensagem de erro em credenciais inválidas
+- [ ] **Logout**
+  - [ ] Botão de logout no header/sidebar
+  - [ ] Limpar cookie e redirecionar para login
+
+---
+
+## Fase 3 — Layout principal
+
+- [ ] **Layout do sistema** (`src/app/(dashboard)/layout.tsx`)
+  - [ ] Sidebar com navegação
+  - [ ] Header com nome do usuário logado e botão de logout
+  - [ ] Responsivo para mobile (menu hamburguer)
+- [ ] **Sidebar com os links:**
+  - [ ] Dashboard
+  - [ ] Produtos
+  - [ ] Estoque
+  - [ ] Vendas
+  - [ ] Financeiro
+  - [ ] Usuários *(visível apenas para gerentes)*
+
+---
+
+## Fase 4 — Dashboard
+
+- [ ] **Página Dashboard** (`/`)
+  - [ ] Card — Total vendido hoje
+  - [ ] Card — Quantidade de vendas hoje
+  - [ ] Card — Total de produtos cadastrados
+  - [ ] Card — Produtos com estoque baixo (com alerta visual)
+  - [ ] Card — Saldo financeiro do dia
+  - [ ] Tabela ou lista — Últimas 5 vendas
+  - [ ] Breakdown por forma de pagamento (Pix, cartão, dinheiro...)
+
+---
+
+## Fase 5 — Produtos
+
+- [ ] **Listagem de produtos** (`/products`)
+  - [ ] Tabela com nome, código, categoria, tamanho, cor, preço e quantidade
+  - [ ] Campo de busca por nome, código, cor ou tamanho
+  - [ ] Badge de status (ativo/inativo)
+  - [ ] Botão de cadastrar produto *(apenas gerente)*
+  - [ ] Botões de editar e inativar por linha *(apenas gerente)*
+- [ ] **Cadastro de produto** (`/products/new`) *(apenas gerente)*
+  - [ ] Formulário completo com todos os campos
+  - [ ] Validação com zod
+  - [ ] Feedback de sucesso ou erro
+- [ ] **Edição de produto** (`/products/[id]/edit`) *(apenas gerente)*
+  - [ ] Formulário pré-preenchido com dados atuais
+  - [ ] Validação com zod
+- [ ] **Inativar produto** *(apenas gerente)*
+  - [ ] Modal de confirmação antes de inativar
+
+---
+
+## Fase 6 — Estoque
+
+- [ ] **Listagem de movimentações** (`/stock`)
+  - [ ] Tabela com produto, tipo, quantidade, responsável e data
+  - [ ] Filtro por produto
+  - [ ] Badge colorido por tipo (entrada verde, saída vermelha, ajuste amarelo...)
+- [ ] **Registrar movimentação** *(apenas gerente)*
+  - [ ] Modal ou página com formulário
+  - [ ] Seleção do produto, tipo de movimentação, quantidade e observação
+- [ ] **Alerta de estoque baixo**
+  - [ ] Seção ou aba com produtos abaixo do mínimo
+  - [ ] Campo para definir a quantidade mínima do filtro
+
+---
+
+## Fase 7 — Vendas
+
+- [ ] **Listagem de vendas** (`/sales`)
+  - [ ] Tabela com data, funcionário, forma de pagamento e total
+  - [ ] Filtro por período (data inicial e data final)
+  - [ ] Botão para ver detalhes da venda
+- [ ] **Detalhe da venda** (`/sales/[id]`)
+  - [ ] Itens da venda com produto, quantidade, preço unitário e subtotal
+  - [ ] Forma de pagamento e parcelas
+  - [ ] Total geral
+- [ ] **Registrar venda** (`/sales/new`)
+  - [ ] Busca e seleção de produtos
+  - [ ] Adicionar múltiplos itens
+  - [ ] Quantidade por item
+  - [ ] Cálculo do total em tempo real
+  - [ ] Seleção da forma de pagamento
+  - [ ] Campo de parcelas (aparece apenas quando parcelado)
+  - [ ] Validação: não permitir quantidade maior que o estoque
+  - [ ] Confirmação antes de finalizar
+- [ ] **Resumo diário** (`/sales/daily`)
+  - [ ] Total vendido no dia
+  - [ ] Total por forma de pagamento
+  - [ ] Seletor de data para consultar outros dias
+
+---
+
+## Fase 8 — Financeiro *(apenas gerente)*
+
+- [ ] **Listagem de entradas/saídas** (`/finance`)
+  - [ ] Tabela com tipo, categoria, descrição, valor e data
+  - [ ] Badge colorido por tipo (entrada verde, saída vermelha)
+  - [ ] Filtro por período e tipo
+- [ ] **Registrar movimentação financeira**
+  - [ ] Modal ou página com formulário
+  - [ ] Seleção de tipo (entrada/saída) e categoria
+  - [ ] Descrição e valor
+- [ ] **Resumo financeiro**
+  - [ ] Card com total de entradas
+  - [ ] Card com total de saídas
+  - [ ] Card com saldo do período
+  - [ ] Seletor de período
+
+---
+
+## Fase 9 — Usuários *(apenas gerente)*
+
+- [ ] **Listagem de usuários** (`/users`)
+  - [ ] Tabela com nome, email, perfil e status
+  - [ ] Badge de perfil (gerente/funcionário)
+  - [ ] Botão de cadastrar usuário
+  - [ ] Botões de editar e inativar
+- [ ] **Cadastro de usuário**
+  - [ ] Modal ou página com formulário
+  - [ ] Seleção de perfil (gerente ou funcionário)
+- [ ] **Edição de usuário**
+  - [ ] Formulário pré-preenchido
+- [ ] **Inativar usuário**
+  - [ ] Modal de confirmação
+
+---
+
+## Fase 10 — Detalhes finais
+
+- [ ] **Controle de permissões no frontend**
+  - [ ] Esconder botões e rotas que o funcionário não pode acessar
+  - [ ] Redirecionar caso funcionário tente acessar rota restrita
+- [ ] **Feedback visual em todas as ações**
+  - [ ] Toast de sucesso após cadastro, edição, venda...
+  - [ ] Toast de erro com mensagem legível
+  - [ ] Loading nos botões durante requisições
+- [ ] **Tratamento de erros globais**
+  - [ ] Interceptor no axios para redirecionar ao login se token expirar (401)
+- [ ] **Estados vazios**
+  - [ ] Mensagem amigável quando não há dados na tabela
+- [ ] **Responsividade**
+  - [ ] Testar em mobile, tablet e desktop
+
+---
+
+## Ordem sugerida de implementação
+
+1. Configuração inicial + serviço de API
+2. Login e autenticação
+3. Layout com sidebar
+4. Dashboard
+5. Produtos
+6. Estoque
+7. Vendas *(mais complexo — deixar para quando o resto estiver funcionando)*
+8. Financeiro
+9. Usuários
+10. Ajustes finais de permissão e UX
+
+---
+
+## Ideia de layout do sistema
+
+```
+┌─────────────────────────────────────────────┐
+│  🧥 Clothing Manager        👤 Tobias  [Sair]│  ← Header
+├──────────────┬──────────────────────────────┤
+│              │                              │
+│  Dashboard   │   [conteúdo da página]       │
+│  Produtos    │                              │
+│  Estoque     │                              │
+│  Vendas      │                              │
+│  Financeiro  │                              │
+│  Usuários    │                              │
+│              │                              │
+└──────────────┴──────────────────────────────┘
+       ↑ Sidebar
+```
+
+A sidebar fica fixa à esquerda no desktop e vira menu hamburguer no mobile.
