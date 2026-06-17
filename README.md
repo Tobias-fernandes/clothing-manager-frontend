@@ -246,7 +246,7 @@ pnpm run start
 |---|
 | Tobias Fernandes Figueiredo |
 | Mateus Gomes Pinheiro |
-| Éverson Alisson de Queiroz |
+| Éverson Alisson Queiroz Silva |
 
 ---
 
