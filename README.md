@@ -204,7 +204,7 @@ cd "clothing manager front/app"
 ### 2. Instalar dependências
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Configurar variáveis de ambiente
@@ -219,7 +219,7 @@ API_URL=http://localhost:3001/api/v1
 ### 4. Iniciar em modo de desenvolvimento
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
@@ -227,8 +227,8 @@ Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 ### 5. Build de produção (opcional)
 
 ```bash
-npm run build
-npm run start
+pnpm run build
+pnpm run start
 ```
 
 ### Usuários padrão para teste
